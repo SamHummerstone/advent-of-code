@@ -54,3 +54,20 @@ func StringReverse(s string) string {
 	}
 	return string(backward)
 }
+
+func ConvertWrittenNumber(oldString string) string {
+	var newString string
+	nums := []string{
+		"one",
+		"two",
+		"three",
+		"four",
+		"five",
+		"six",
+		"seven",
+		"eight",
+		"nine",
+	}
+
+	return newString
+}
