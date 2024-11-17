@@ -1,0 +1,1 @@
+Now, I am very aware how janky this is, but I want to not over-organise until I need to. This is to learn why things should be written in certain ways the hard way.
