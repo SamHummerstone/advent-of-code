@@ -75,3 +75,7 @@ func (g Game) CheckGame(check GameDice) bool {
 		return true
 	}
 }
+
+func (g Game) Power() int {
+	return g.Red * g.Green * g.Blue
+}

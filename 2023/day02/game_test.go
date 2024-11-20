@@ -47,6 +47,43 @@ func Test_CheckGame(t *testing.T) {
 
 		tcs := []struct {
 			input  Game
+			expect int
+		}{
+			{
+				input:  *gs[0],
+				expect: 48,
+			},
+			{
+				input:  *gs[1],
+				expect: 12,
+			},
+			{
+				input:  *gs[2],
+				expect: 1560,
+			},
+			{
+				input:  *gs[3],
+				expect: 630,
+			},
+			{
+				input:  *gs[4],
+				expect: 36,
+			},
+		}
+		for _, tc := range tcs {
+			if res := tc.input.Power(); res != tc.expect {
+				t.Errorf("Want: %v\nGot: %v", tc.expect, res)
+			}
+		}
+	})
+}
+
+func Test_Power(t *testing.T) {
+	t.Run("Test Game Power", func(t *testing.T) {
+		gs := LinestoGames(strings.Split(examples1, "\n"))
+
+		tcs := []struct {
+			input  Game
 			expect bool
 		}{
 			{
