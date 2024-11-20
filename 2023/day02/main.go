@@ -21,8 +21,35 @@ func main() {
 	}
 	lines := strings.Split(string(input), "\n")
 
-	for _, i := range lines {
-		New(i)
+	games := LinestoGames(lines)
+	gameDice := GameDice{
+		Red:   12,
+		Green: 13,
+		Blue:  14,
 	}
 
+	solution1 := Part1(games, gameDice)
+
+	fmt.Println(solution1)
+
+}
+
+func Part1(games []*Game, gd GameDice) int {
+	var idSum int = 0
+	for _, g := range games {
+		if g.CheckGame(gd) {
+			idSum += g.Id
+		}
+	}
+
+	return idSum
+}
+
+func LinestoGames(lines []string) []*Game {
+	// Make a list of games from the lines
+	games := make([]*Game, len(lines))
+	for i, l := range lines {
+		games[i] = New(l)
+	}
+	return games
 }

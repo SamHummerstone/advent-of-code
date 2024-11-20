@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 	"strings"
 )
@@ -13,10 +14,20 @@ type Game struct {
 	Blue  int
 }
 
+type GameDice struct {
+	Red   int
+	Green int
+	Blue  int
+}
+
 func New(s string) *Game {
 	var red, green, blue int = 0, 0, 0
 	idStr, rem, _ := strings.Cut(s, ":")
-	id, _ := strconv.Atoi(string([]byte(idStr)[len(idStr)-1]))
+	id, err := strconv.Atoi(strings.TrimPrefix(idStr, "Game "))
+	if err != nil {
+		fmt.Println("Could not convert ID to int:", err)
+		os.Exit(1)
+	}
 
 	// Split into rounds
 	for _, r := range strings.Split(rem, ";") {
@@ -26,6 +37,7 @@ func New(s string) *Game {
 			count, err := strconv.Atoi(colourCount[0])
 			if err != nil {
 				fmt.Printf("Cannot convert str to int: %v", err)
+				os.Exit(1)
 			}
 			switch colour := colourCount[1]; colour {
 			case "red":
@@ -48,5 +60,18 @@ func New(s string) *Game {
 		Red:   red,
 		Green: green,
 		Blue:  blue,
+	}
+}
+
+func (g Game) CheckGame(check GameDice) bool {
+	switch {
+	case g.Red > check.Red:
+		return false
+	case g.Blue > check.Blue:
+		return false
+	case g.Green > check.Green:
+		return false
+	default:
+		return true
 	}
 }
