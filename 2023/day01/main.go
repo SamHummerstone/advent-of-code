@@ -16,10 +16,10 @@ var (
 
 func main() {
 	input, err := inputFile.ReadFile("input.txt")
-	lines := strings.Split(string(input), "\n")
 	if err != nil {
 		log.Fatal("Could not open input file:", err)
 	}
+	lines := strings.Split(string(input), "\n")
 
 	log.Println("input list length:", len(lines))
 	part1 := Part1(lines)
