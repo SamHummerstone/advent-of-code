@@ -1,0 +1,3 @@
+I was a bit lazy here and brute forced the part 2, I would probably speed it up by removing elements that have been checked to reduce the slice size.
+I also was a bit lazy with tests as the problem wasn't too complicated, I'll try writing tests first next time and attempt to Red, Green, Refactor.
+Eventually I need to try some concurrency, even if it's just splitting a task across `n` workers to speed up. Maybe tomorrow.
