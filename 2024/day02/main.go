@@ -3,6 +3,8 @@ package main
 import (
 	"embed"
 	"fmt"
+	"strconv"
+	"strings"
 )
 
 //go:embed input.txt
@@ -17,5 +19,30 @@ func main() {
 }
 
 func Part1(reports string) int {
-	return 0
+	var count int
+	reportSplit := strings.Split(reports, "\n")
+
+	for _, r := range reportSplit {
+		if IsReportSafe(ReportStringToInts(r)) {
+			count++
+		}
+	}
+	return count
+}
+
+func IsReportSafe(report []int) bool {
+	return false
+}
+
+func ReportStringToInts(r string) []int {
+	var ints []int
+	rSplit := strings.Split(r, " ")
+	for _, level := range rSplit {
+		l, err := strconv.Atoi(level)
+		if err != nil {
+			panic(fmt.Sprintln("ReportStringToInts:", err))
+		}
+		ints = append(ints, l)
+	}
+	return ints
 }
