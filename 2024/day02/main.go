@@ -3,6 +3,7 @@ package main
 import (
 	"embed"
 	"fmt"
+	"slices"
 	"strconv"
 	"strings"
 )
@@ -28,6 +29,28 @@ func Part1(reports string) int {
 		}
 	}
 	return count
+}
+
+func Part2(reports string) int {
+	var count int
+	reportSplit := strings.Split(reports, "\n")
+
+	for _, r := range reportSplit {
+		if IsReportSafe(ReportStringToInts(r)) {
+			count++
+		}
+	}
+	return count
+}
+
+func GetDampenedReports(report []int) [][]int {
+	var dampReports [][]int
+	var newReport []int
+	for i := 0; i < len(report); i++ {
+		newReport = slices.Delete(report, i, i+1)
+		dampReports = append(dampReports, newReport)
+	}
+	return dampReports
 }
 
 func IsReportSafe(report []int) bool {

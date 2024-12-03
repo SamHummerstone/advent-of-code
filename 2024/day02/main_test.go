@@ -26,6 +26,37 @@ func Test_Part1(t *testing.T) {
 	})
 }
 
+func Test_Part2(t *testing.T) {
+	t.Run("Test Part1 func", func(t *testing.T) {
+		want := 4
+		got := Part2(TestString)
+
+		if want != got {
+			t.Errorf("Wanted: %v\nGot: %v\n", want, got)
+		}
+	})
+}
+
+func Test_GetDampenedReports(t *testing.T) {
+	t.Run("Test GetDampenedReports func", func(t *testing.T) {
+		tc := []int{7, 6, 4, 2, 1}
+		want := [][]int{
+			{6, 4, 2, 1},
+			{7, 4, 2, 1},
+			{7, 6, 2, 1},
+			{7, 6, 4, 1},
+			{7, 6, 4, 2},
+		}
+		got := GetDampenedReports(tc)
+
+		for i, r := range got {
+			if !slices.Equal(want[i], r) {
+				t.Errorf("Wanted: %v\nGot: %v", want[i], r)
+			}
+		}
+	})
+}
+
 func Test_ReportStringToInts(t *testing.T) {
 	tcs := []struct {
 		Input  string
