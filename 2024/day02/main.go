@@ -31,7 +31,37 @@ func Part1(reports string) int {
 }
 
 func IsReportSafe(report []int) bool {
-	return false
+	var isAscending bool
+	var dif, lastNum int
+	if firstDif := report[0] - report[1]; firstDif == 0 {
+		return false
+	} else if firstDif > 0 {
+		isAscending = false
+	} else {
+		isAscending = true
+	}
+
+	fmt.Println("Is ascending:", isAscending)
+
+	for i, n := range report {
+		if i == 0 {
+			lastNum = n
+			continue
+		}
+		dif = lastNum - n
+		if dif == 0 {
+			return false
+		}
+		if !isAscending && (dif > 3 || dif < 0) {
+			return false
+		}
+		if isAscending && (dif < -3 || dif > 0) {
+			return false
+		}
+		lastNum = n
+	}
+
+	return true
 }
 
 func ReportStringToInts(r string) []int {
