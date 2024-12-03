@@ -41,8 +41,6 @@ func IsReportSafe(report []int) bool {
 		isAscending = true
 	}
 
-	fmt.Println("Is ascending:", isAscending)
-
 	for i, n := range report {
 		if i == 0 {
 			lastNum = n
