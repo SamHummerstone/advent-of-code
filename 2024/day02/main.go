@@ -3,7 +3,6 @@ package main
 import (
 	"embed"
 	"fmt"
-	"slices"
 	"strconv"
 	"strings"
 )
@@ -17,6 +16,7 @@ func main() {
 		panic("Could not load input file")
 	}
 	fmt.Println(Part1(string(inputString)))
+	fmt.Println(Part2(string(inputString)))
 }
 
 func Part1(reports string) int {
@@ -24,7 +24,9 @@ func Part1(reports string) int {
 	reportSplit := strings.Split(reports, "\n")
 
 	for _, r := range reportSplit {
-		if IsReportSafe(ReportStringToInts(r)) {
+		report := New(ReportStringToInts(r))
+
+		if report.Safe {
 			count++
 		}
 	}
@@ -36,53 +38,23 @@ func Part2(reports string) int {
 	reportSplit := strings.Split(reports, "\n")
 
 	for _, r := range reportSplit {
-		if IsReportSafe(ReportStringToInts(r)) {
+		report := New(ReportStringToInts(r))
+		if report.Safe {
 			count++
+			continue
+		}
+		fmt.Println("Report:", *report)
+		size := len(report.Content)
+		for i := 0; i < size; i++ {
+			dampReport := report.Dampen(i)
+			fmt.Println(dampReport)
+			if dampReport.Safe {
+				count++
+				break
+			}
 		}
 	}
 	return count
-}
-
-func GetDampenedReports(report []int) [][]int {
-	var dampReports [][]int
-	var newReport []int
-	for i := 0; i < len(report); i++ {
-		newReport = slices.Delete(report, i, i+1)
-		dampReports = append(dampReports, newReport)
-	}
-	return dampReports
-}
-
-func IsReportSafe(report []int) bool {
-	var isAscending bool
-	var dif, lastNum int
-	if firstDif := report[0] - report[1]; firstDif == 0 {
-		return false
-	} else if firstDif > 0 {
-		isAscending = false
-	} else {
-		isAscending = true
-	}
-
-	for i, n := range report {
-		if i == 0 {
-			lastNum = n
-			continue
-		}
-		dif = lastNum - n
-		if dif == 0 {
-			return false
-		}
-		if !isAscending && (dif > 3 || dif < 0) {
-			return false
-		}
-		if isAscending && (dif < -3 || dif > 0) {
-			return false
-		}
-		lastNum = n
-	}
-
-	return true
 }
 
 func ReportStringToInts(r string) []int {

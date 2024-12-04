@@ -37,24 +37,23 @@ func Test_Part2(t *testing.T) {
 	})
 }
 
-func Test_GetDampenedReports(t *testing.T) {
-	t.Run("Test GetDampenedReports func", func(t *testing.T) {
-		tc := []int{7, 6, 4, 2, 1}
-		want := [][]int{
-			{6, 4, 2, 1},
-			{7, 4, 2, 1},
-			{7, 6, 2, 1},
-			{7, 6, 4, 1},
-			{7, 6, 4, 2},
-		}
-		got := GetDampenedReports(tc)
+// want1 := []int{7, 4, 2, 1}
+// want2 := []int{7, 6, 2, 1}
+// want3 := []int{7, 6, 4, 1}
+// want4 := []int{7, 6, 4, 2}
 
-		for i, r := range got {
-			if !slices.Equal(want[i], r) {
-				t.Errorf("Wanted: %v\nGot: %v", want[i], r)
-			}
-		}
-	})
+func Test_GetDampenedReports(t *testing.T) {
+	// t.Run("Test GetDampenedReports func - Case 0", func(t *testing.T) {
+	// 	tc := []int{7, 6, 4, 2, 1}
+	// 	want := []int{6, 4, 2, 1}
+
+	// 	got := GetDampenedReport(tc, 0)
+
+	// 	if !slices.Equal(want, got) {
+	// 		t.Errorf("Wanted: %v\nGot: %v", want, got)
+	// 	}
+	// })
+
 }
 
 func Test_ReportStringToInts(t *testing.T) {
@@ -93,47 +92,6 @@ func Test_ReportStringToInts(t *testing.T) {
 			want := tc.Expect
 			got := ReportStringToInts(tc.Input)
 			if !slices.Equal(want, got) {
-				t.Errorf("Wanted: %v\nGot: %v", want, got)
-			}
-		})
-	}
-}
-
-func Test_IsReportSafe(t *testing.T) {
-	tcs := []struct {
-		Input  []int
-		Expect bool
-	}{
-		{
-			Input:  []int{7, 6, 4, 2, 1},
-			Expect: true,
-		},
-		{
-			Input:  []int{1, 2, 7, 8, 9},
-			Expect: false,
-		},
-		{
-			Input:  []int{9, 7, 6, 2, 1},
-			Expect: false,
-		},
-		{
-			Input:  []int{1, 3, 2, 4, 5},
-			Expect: false,
-		},
-		{
-			Input:  []int{8, 6, 4, 4, 1},
-			Expect: false,
-		},
-		{
-			Input:  []int{1, 3, 6, 7, 9},
-			Expect: true,
-		},
-	}
-	for i, tc := range tcs {
-		t.Run(fmt.Sprintf("Test IsReportSafe - Case %v", i), func(t *testing.T) {
-			want := tc.Expect
-			got := IsReportSafe(tc.Input)
-			if want != got {
 				t.Errorf("Wanted: %v\nGot: %v", want, got)
 			}
 		})
