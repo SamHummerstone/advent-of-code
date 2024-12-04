@@ -26,3 +26,7 @@ Analyze the unusual data from the engineers. How many reports are safe?
 
 ---
 
+Oh boy, part 1 was ok, part 2 is ok in theory, but Go slices really effed me up on this one.
+It took a good bit of googling to find the answer to the slice problem and I stole the code directly which is a bit naughty but necessary. Writing the tests first was really helpful, although at part 2 I broke the rules and refactored some of the structs. The broke my code AND the tests, and I ended up missing a test for the `Dampen` function.
+
+Another note is to read the spec closer, I was double counting some report passing as I didn't correctly break out of the loop after a report was deemed 'safe'. I kept wondering why my tests weren't working, so I'll need to do better at that next time.

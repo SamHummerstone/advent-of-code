@@ -37,25 +37,6 @@ func Test_Part2(t *testing.T) {
 	})
 }
 
-// want1 := []int{7, 4, 2, 1}
-// want2 := []int{7, 6, 2, 1}
-// want3 := []int{7, 6, 4, 1}
-// want4 := []int{7, 6, 4, 2}
-
-func Test_GetDampenedReports(t *testing.T) {
-	// t.Run("Test GetDampenedReports func - Case 0", func(t *testing.T) {
-	// 	tc := []int{7, 6, 4, 2, 1}
-	// 	want := []int{6, 4, 2, 1}
-
-	// 	got := GetDampenedReport(tc, 0)
-
-	// 	if !slices.Equal(want, got) {
-	// 		t.Errorf("Wanted: %v\nGot: %v", want, got)
-	// 	}
-	// })
-
-}
-
 func Test_ReportStringToInts(t *testing.T) {
 	tcs := []struct {
 		Input  string

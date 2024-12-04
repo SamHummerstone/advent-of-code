@@ -5,6 +5,7 @@ type Report struct {
 	Safe    bool
 }
 
+// Stolen from michael.schuett at https://stackoverflow.com/questions/37334119/how-to-delete-an-element-from-a-slice-in-golang
 // func RemoveIndex(s []int, index int) []int {
 // 	ret := make([]int, 0)
 // 	ret = append(ret, s[:index]...)
