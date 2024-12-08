@@ -17,3 +17,6 @@ Only the four highlighted sections are real mul instructions. Adding up the resu
 Scan the corrupted memory for uncorrupted mul instructions. What do you get if you add up all of the results of the multiplications?
 
 ---
+This wasn't too bad, mostly regex trial and error honestly. Getting the difference between FindAllString and FindStringSubmatch was the challenge of the first part, and then making sure that the rgeex for the second part didn't search for combined strings (So using the `|` symbol in the regex formula to treat them all as individual cases)
+
+Testing up front helped again, although I did rely on a lot of print statements to try and figure out wtf the regex matches looked like. Should find a better way of doing that next time.
