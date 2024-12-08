@@ -8,6 +8,7 @@ import (
 
 //go:embed inputFile.txt
 var inputFile embed.FS
+var mulExpr = `mul\(([0-9]+),([0-9]+)\)`
 
 func main() {
 	inputFile, err := inputFile.ReadFile("inputFile.txt")
@@ -19,7 +20,20 @@ func main() {
 
 func Part1(input []byte) int {
 	var count int
-	muls := ExtractOccurances(`(mul\([0-9]+,[0-9]+\))*`, string(input))
+	var muls []Mul
+
+	mulStrings := ExtractOccurances(mulExpr, string(input))
+
+	fmt.Println(mulStrings)
+
+	for _, m := range mulStrings {
+		nm, err := New(m)
+		if err != nil {
+			fmt.Println("Could not convert string:", m)
+			break
+		}
+		muls = append(muls, nm)
+	}
 
 	for _, m := range muls {
 		count += m.Equals()
@@ -28,11 +42,9 @@ func Part1(input []byte) int {
 	return count
 }
 
-func ExtractOccurances(regex, source string) []Mul {
-	var occurances []Mul
+func ExtractOccurances(regex, source string) []string {
 	re := regexp.MustCompile(regex)
+	matches := re.FindAllString(source, -1)
 
-	matches := re.FindStringSubmatch(source)
-
-	return occurances
+	return matches
 }
