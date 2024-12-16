@@ -1,11 +1,10 @@
 package main
 
 import (
-	"strings"
 	"testing"
 )
 
-var testString = `47|53
+var testString = []byte(`47|53
 97|13
 97|61
 97|47
@@ -32,20 +31,19 @@ var testString = `47|53
 75,29,13
 75,97,47,61,53
 61,13,29
-97,13,75,29,47`
+97,13,75,29,47`)
 
-var pages, rules string
+var ruleTestList []Rule
+var pageTestList []Page
 
 func init() {
-	inputSplit := strings.Split(string(testString), "\n\n")
-
-	rules, pages = inputSplit[0], inputSplit[1]
+	ruleTestList, pageTestList = ProcessInputString(testString)
 }
 
 func Test_Part1(t *testing.T) {
 	t.Run("Test Part1", func(t *testing.T) {
 		want := 143
-		got := Part1(pages, rules)
+		got := Part1(ruleTestList, pageTestList)
 
 		if want != got {
 			t.Errorf("Wanted: %v\nGot: %v", want, got)

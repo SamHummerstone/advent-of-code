@@ -15,15 +15,42 @@ func main() {
 		panic("Could not read input file")
 	}
 
-	inputSplit := strings.Split(string(inputFile), "\n\n")
+	ruleList, pageList := ProcessInputString(inputFile)
+
+	fmt.Println(Part1(ruleList, pageList))
+}
+
+func Part1(rules []Rule, pages []Page) int {
+	var result int
+
+	for _, page := range pages {
+		relevantRules := GetRelevantRules(rules, page)
+		if page.IsValid(relevantRules) {
+			// fmt.Println("page", page, "has relevant rules:", relevantRules)
+			result += page.GetMiddleNum()
+		}
+	}
+
+	return result
+}
+
+func ProcessInputString(input []byte) ([]Rule, []Page) {
+	var ruleList []Rule
+	var pageList []Page
+
+	inputSplit := strings.Split(string(input), "\n\n")
 
 	rules, pages := inputSplit[0], inputSplit[1]
 
-	fmt.Println(Part1(rules, pages))
-}
+	rulesStrings := strings.Split(rules, "\n")
+	for _, rule := range rulesStrings {
+		ruleList = append(ruleList, NewRule(rule))
+	}
 
-func Part1(rules, pages string) int {
-	fmt.Println(rules)
+	pageStrings := strings.Split(pages, "\n")
+	for _, p := range pageStrings {
+		pageList = append(pageList, NewPage(p))
+	}
 
-	return 0
+	return ruleList, pageList
 }
