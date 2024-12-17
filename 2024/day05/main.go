@@ -18,6 +18,7 @@ func main() {
 	ruleList, pageList := ProcessInputString(inputFile)
 
 	fmt.Println(Part1(ruleList, pageList))
+	fmt.Println(Part2(ruleList, pageList))
 }
 
 func Part1(rules []Rule, pages []Page) int {
@@ -26,8 +27,22 @@ func Part1(rules []Rule, pages []Page) int {
 	for _, page := range pages {
 		relevantRules := GetRelevantRules(rules, page)
 		if page.IsValid(relevantRules) {
-			// fmt.Println("page", page, "has relevant rules:", relevantRules)
 			result += page.GetMiddleNum()
+		}
+	}
+
+	return result
+}
+
+// TODO
+func Part2(rules []Rule, pages []Page) int {
+	var result int
+
+	for _, page := range pages {
+		relevantRules := GetRelevantRules(rules, page)
+		if !page.IsValid(relevantRules) {
+			newPage := page.Reorder(relevantRules)
+			result += newPage.GetMiddleNum()
 		}
 	}
 

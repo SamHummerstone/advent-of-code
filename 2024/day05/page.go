@@ -58,3 +58,9 @@ func (p Page) IsValid(rules []Rule) bool {
 	}
 	return true
 }
+
+func (p Page) Reorder(relevantRules []Rule) Page {
+	var newPage Page = p
+
+	return newPage
+}

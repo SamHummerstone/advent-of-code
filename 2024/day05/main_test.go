@@ -50,3 +50,14 @@ func Test_Part1(t *testing.T) {
 		}
 	})
 }
+
+func Test_Part2(t *testing.T) {
+	t.Run("Test Part2", func(t *testing.T) {
+		want := 123
+		got := Part2(ruleTestList, pageTestList)
+
+		if want != got {
+			t.Errorf("Wanted: %v\nGot: %v", want, got)
+		}
+	})
+}

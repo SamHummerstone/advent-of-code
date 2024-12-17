@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"slices"
 	"testing"
 )
 
@@ -66,6 +67,43 @@ func TestPage_IsValid(t *testing.T) {
 			want := tc.Expect
 			if got != want {
 				t.Errorf("Got: %v\nWanted: %v", got, want)
+			}
+		})
+	}
+}
+
+func TestPage_Reorder(t *testing.T) {
+	tcs := []struct {
+		Input  Page
+		Expect Page
+	}{
+		{
+			Input: pageTestList[3],
+			Expect: Page{
+				97, 75, 47, 61, 53,
+			},
+		},
+		{
+			Input: pageTestList[4],
+			Expect: Page{
+				61, 29, 13,
+			},
+		},
+		{
+			Input: pageTestList[5],
+			Expect: Page{
+				97, 75, 47, 29, 13,
+			},
+		},
+	}
+	for i, tc := range tcs {
+		t.Run(fmt.Sprintf("Test Reorder - Case %v", i+1), func(t *testing.T) {
+			relevantRules := GetRelevantRules(ruleTestList, tc.Input)
+			want := tc.Expect
+			got := tc.Input.Reorder(relevantRules)
+
+			if !slices.Equal(got, want) {
+				t.Errorf("Wanted: %v\nGot: %v", want, got)
 			}
 		})
 	}
